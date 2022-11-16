@@ -1,0 +1,108 @@
+#Ruta mas corta
+import math
+valores={
+
+    "1":[math.inf,""],
+
+    "2":[math.inf,""],
+
+    "3":[math.inf,""],
+
+    "4":[math.inf,""],
+
+    "5":[math.inf,""],
+
+    "6":[math.inf,""],
+
+    "7":[math.inf,""],
+
+    "8":[math.inf,""]
+
+}
+ 
+
+# se establece cada uno de los caminos en una sola dirección y el coste
+
+caminos=[
+
+    ["1","2",1],
+
+    ["1","3",2],
+
+    ["2","3",1],
+
+    ["2","4",5],
+
+    ["2","5",5],
+
+    ["3","4",2],
+
+    ["3","5",1],
+
+    ["3","6",4],
+
+    ["4","5",3],
+
+    ["4","6",6],
+
+    ["4","7",8],
+    
+    ["5","6",3],
+    
+    ["5","7",7],
+    
+    ["6","7",5],
+    
+    ["6","8",8],
+    
+    ["7","8",8]
+
+]
+
+ 
+
+def setValores(origen,destino,valor):
+
+    if valor<valores[destino][0]:
+        # guardamos el nuevo valor mas bajo
+        valores[destino][0]=valor
+        # guardamos de donde viene el valor mas bajo
+        valores[destino][1]=origen
+        return True
+    return False
+    
+# definimos el nodo de inicio y de final 
+
+inicio="1"
+final="8"
+
+valores[inicio][0]=0
+
+# realizamos un bucle hasta que no haya ningun otro cambio de valores
+
+while True:
+
+    cancel=True
+    # recorremos cada uno de los caminos
+
+    for i in caminos:
+        # enviamos los datos del camino
+
+        if setValores(i[0],i[1],valores[i[0]][0]+i[2]):
+
+            cancel=False
+    if cancel:
+
+        break
+
+# iniciamos la busqueda del camino mas corto
+camino=[final]
+while True:
+
+    if camino[-1]==inicio:
+
+        break
+    
+    camino.append(valores[camino[-1]][1])
+   
+print("La ruta más corta desde el nodo '{}' hasta el nodo '{}' es a lo largo de: {}.".format(inicio, final, camino[::-1],))
