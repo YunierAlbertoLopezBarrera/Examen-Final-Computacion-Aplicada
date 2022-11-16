@@ -1,0 +1,18 @@
+# Runge Kutta de 4do orden
+from math import *
+def f(x,y):
+    func=1+y*y
+    return func
+
+#Algoritmo RK4to orden#
+def RK4(x,y,h,n):
+    print('y(' ,x, ')=',y)
+    for k in range(n):
+        k1 = f(x, y)
+        k2 = f(x + 0.5 * h  ,  y + 0.5 * h * k1)
+        k3 = f(x + 0.5 * h  ,  y + 0.5 * h * k2)
+        k4 = f(x +       h  ,  y + h*k3 )
+        y=y + h/6 *(k1 + 2 * k2 + 2 * k3 + k4) 
+        x=x+h
+        print('y(' ,x, ')=',y)
+RK4(0,0,0.1,14)
